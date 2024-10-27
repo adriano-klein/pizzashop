@@ -10,7 +10,7 @@ import {
   SelectValue,
 } from '@/components/ui/select'
 
-export function OrderTableFilter() {
+export function OrderTableFilters() {
   return (
     <form className="flex items-center gap-2" action="">
       <span className="text-sm font-semibold"> Filtros</span>
