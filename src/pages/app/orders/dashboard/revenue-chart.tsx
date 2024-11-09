@@ -1,14 +1,12 @@
-import { Value } from '@radix-ui/react-select'
 import {
   CartesianGrid,
   Line,
   LineChart,
   ResponsiveContainer,
-  Tooltip,
   XAxis,
   YAxis,
 } from 'recharts'
-import colors, { violet } from 'tailwindcss/colors'
+import colors from 'tailwindcss/colors'
 
 import {
   Card,
@@ -54,6 +52,7 @@ export function RevenueChart() {
                 })
               }
             />
+            <CartesianGrid vertical={false} className="stroke-muted" />
             <Line
               type="monotone"
               strokeWidth={2}
@@ -61,7 +60,6 @@ export function RevenueChart() {
               stroke={colors.violet['500']}
             />
             <XAxis dataKey="date" tickLine={false} axisLine={false} dy={16} />
-            <Tooltip />
           </LineChart>
         </ResponsiveContainer>
       </CardContent>
