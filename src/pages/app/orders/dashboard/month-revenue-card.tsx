@@ -19,10 +19,11 @@ export function MonthRevenueCard() {
       </CardHeader>
       <CardContent className="space-y-1">
         <span className="text-2xl font-bold tracking-tight">
-          {monthRevenue?.receipt.toLocaleString('pt-BR', {
-            style: 'currency',
-            currency: 'BRL',
-          })}
+          {monthRevenue?.receipt &&
+            (monthRevenue.receipt / 100).toLocaleString('pt-BR', {
+              style: 'currency',
+              currency: 'BRL',
+            })}
         </span>
         <p className="text-xs text-muted-foreground">
           <>

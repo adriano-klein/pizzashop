@@ -32,7 +32,7 @@ export function MonthOrderAmount() {
           ) : (
             <>
               <span className="text-rose-50 dark:text-rose-400">
-                {monthOrdersAmount?.diffFromLastMonth}
+                {monthOrdersAmount?.diffFromLastMonth}%
               </span>{' '}
               em relação a ontem
             </>
