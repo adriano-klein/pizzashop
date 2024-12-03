@@ -70,7 +70,7 @@ export function OrderTableFilters() {
       state.delete('orderId')
       state.delete('customerName')
       state.delete('status')
-      state.delete('page')
+      state.set('page', '1')
       return state
     })
 
