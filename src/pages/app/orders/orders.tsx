@@ -19,6 +19,10 @@ import { OrderTableRow } from './order-table-row'
 export function Orders() {
   // NOTE: para a paginação o ideal é usarmos o searchParams
   const [searchParams, setSearchParams] = useSearchParams()
+  const orderId = searchParams.get('orderId')
+  const customerName = searchParams.get('customerName')
+  const status = searchParams.get('status')
+
   const pageIndex = z.coerce
     .number()
     .transform((page) => page - 1)
@@ -26,11 +30,15 @@ export function Orders() {
 
   const { data: result } = useQuery({
     // NOTE: o pageIndex é necessário aqui para atualizar a página automaticamente
-    queryKey: ['orders', pageIndex],
+    // NOTE: todos os valores que preciso enviar na url devem estar na queryKey
+    queryKey: ['orders', pageIndex, orderId, customerName, status],
     queryFn: () =>
       getOrders({
         // NOTE: pageIndex é o número da página que está sendo acessada
         pageIndex,
+        orderId,
+        customerName,
+        status: status === 'all' ? null : status,
       }),
   })
   function handlePaginate(pageIndex: number) {
