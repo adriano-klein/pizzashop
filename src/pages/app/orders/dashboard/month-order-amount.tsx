@@ -4,11 +4,14 @@ import { Utensils } from 'lucide-react'
 import { getMonthOrdersAmount } from '@/api/get-month-orders-amount'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 
+import { MetricsCardSkeleton } from './metric-card-skeleton'
+
 export function MonthOrderAmount() {
-  const { data: monthOrdersAmount } = useQuery({
+  const { data: monthOrdersAmount, isLoading } = useQuery({
     queryKey: ['metrics', 'month-orders-amount'],
     queryFn: getMonthOrdersAmount,
   })
+
   return (
     <Card>
       <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
@@ -16,28 +19,35 @@ export function MonthOrderAmount() {
         <Utensils className="h4-w-4 text-muted-foreground" />
       </CardHeader>
       <CardContent className="space-y-1">
-        <span className="text-2xl font-bold tracking-tight">
-          {monthOrdersAmount?.diffFromLastMonth &&
-            monthOrdersAmount.amount.toLocaleString('pt-BR')}
-        </span>
-        <p className="text-xs text-muted-foreground">
-          {monthOrdersAmount?.diffFromLastMonth &&
-          monthOrdersAmount.diffFromLastMonth >= 0 ? (
-            <>
-              <span className="text-rose-50 dark:text-emerald-400">
-                +{monthOrdersAmount?.diffFromLastMonth}%
-              </span>{' '}
-              em relação a ontem
-            </>
-          ) : (
-            <>
-              <span className="text-rose-50 dark:text-rose-400">
-                {monthOrdersAmount?.diffFromLastMonth}%
-              </span>{' '}
-              em relação a ontem
-            </>
-          )}
-        </p>
+        {isLoading ? (
+          <MetricsCardSkeleton />
+        ) : (
+          <>
+            {monthOrdersAmount?.amount && (
+              <span className="text-2xl font-bold tracking-tight">
+                {monthOrdersAmount.amount.toLocaleString('pt-BR')}
+              </span>
+            )}
+            <p className="text-xs text-muted-foreground">
+              {monthOrdersAmount?.diffFromLastMonth &&
+              monthOrdersAmount.diffFromLastMonth >= 0 ? (
+                <>
+                  <span className="text-rose-50 dark:text-emerald-400">
+                    +{monthOrdersAmount?.diffFromLastMonth}%
+                  </span>{' '}
+                  em relação a ontem
+                </>
+              ) : (
+                <>
+                  <span className="text-rose-50 dark:text-rose-400">
+                    {monthOrdersAmount?.diffFromLastMonth}%
+                  </span>{' '}
+                  em relação a ontem
+                </>
+              )}
+            </p>
+          </>
+        )}
       </CardContent>
     </Card>
   )

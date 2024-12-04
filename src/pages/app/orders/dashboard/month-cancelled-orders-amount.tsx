@@ -4,6 +4,8 @@ import { DollarSign } from 'lucide-react'
 import { getMonthCancelledOrdersAmount } from '@/api/get-canceled-month-orders-amount'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 
+import { MetricsCardSkeleton } from './metric-card-skeleton'
+
 export function MonthCancelledAmount() {
   const { data: cancelledOrders } = useQuery({
     queryKey: ['metrics', 'month-cancelled-orders-amount'],
@@ -23,21 +25,24 @@ export function MonthCancelledAmount() {
         </span>
         <p className="text-xs text-muted-foreground">
           <>
-            {cancelledOrders?.amount &&
-            cancelledOrders.diffFromLastMonth >= 0 ? (
-              <>
-                <span className="text-emerald-50 dark:text-rose-400">
-                  {cancelledOrders.diffFromLastMonth}%
-                </span>{' '}
-                em relação ao mês passado
-              </>
+            {cancelledOrders?.amount ? (
+              cancelledOrders.diffFromLastMonth >= 0 ? (
+                <>
+                  <span className="text-emerald-50 dark:text-rose-400">
+                    {cancelledOrders.diffFromLastMonth}%
+                  </span>{' '}
+                  em relação ao mês passado
+                </>
+              ) : (
+                <>
+                  <span className="text-emerald-50 dark:text-emerald-400">
+                    {cancelledOrders?.diffFromLastMonth}%
+                  </span>{' '}
+                  em relação ao mês passado
+                </>
+              )
             ) : (
-              <>
-                <span className="text-emerald-50 dark:text-emerald-400">
-                  {cancelledOrders?.diffFromLastMonth}%
-                </span>{' '}
-                em relação ao mês passado
-              </>
+              MetricsCardSkeleton()
             )}
           </>
         </p>

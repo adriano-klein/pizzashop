@@ -1,4 +1,5 @@
 import { useQuery } from '@tanstack/react-query'
+import { is } from 'date-fns/locale'
 import { Helmet } from 'react-helmet-async'
 import { useSearchParams } from 'react-router-dom'
 import { z } from 'zod'
@@ -15,6 +16,7 @@ import {
 
 import { OrderTableFilters } from './order-table-filters'
 import { OrderTableRow } from './order-table-row'
+import { OrderTableSkeleton } from './order-table-skeleton'
 
 export function Orders() {
   // NOTE: para a paginação o ideal é usarmos o searchParams
@@ -28,7 +30,7 @@ export function Orders() {
     .transform((page) => page - 1)
     .parse(searchParams.get('page') ?? '1')
 
-  const { data: result } = useQuery({
+  const { data: result, isLoading: isLoadingOrders } = useQuery({
     // NOTE: o pageIndex é necessário aqui para atualizar a página automaticamente
     // NOTE: todos os valores que preciso enviar na url devem estar na queryKey
     queryKey: ['orders', pageIndex, orderId, customerName, status],
@@ -71,6 +73,7 @@ export function Orders() {
                 </TableRow>
               </TableHeader>
               <TableBody>
+                {isLoadingOrders && <OrderTableSkeleton />}
                 {result &&
                   result.orders.map((order) => {
                     return <OrderTableRow key={order.orderId} order={order} />
