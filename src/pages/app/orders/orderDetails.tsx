@@ -5,7 +5,7 @@ import { ptBR } from 'date-fns/locale'
 
 import { getOrderDetails } from '@/api/get-order-details'
 
-import { DialogContent, DialogHeader } from './ui/dialog'
+import { DialogContent, DialogHeader } from '../../../components/ui/dialog'
 import {
   Table,
   TableBody,
@@ -14,7 +14,8 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from './ui/table'
+} from '../../../components/ui/table'
+import { OrderDetailsSkeleton } from './order-details-skeleton'
 
 export interface OrderDetailsProps {
   orderId: string
@@ -36,12 +37,13 @@ export function OrderDetails({ orderId, open }: OrderDetailsProps) {
         <DialogDescription>Detalhes do pedido</DialogDescription>
       </DialogHeader>
 
-      {order && (
-        <div className="space-8">
+      {order ? (
+        <div className="space-y-6">
           <Table>
             <TableBody>
               <TableRow>
-                <TableCell>
+                <TableCell className="text-muted-foreground">Status</TableCell>
+                <TableCell className="flex justify-end">
                   <div className="h-2 items-center gap-2">
                     <span className="h-2 w-2 rounded-full bg-slate-400" />
                     <span className="font-medium text-muted-foreground">
@@ -53,7 +55,7 @@ export function OrderDetails({ orderId, open }: OrderDetailsProps) {
 
               <TableRow>
                 <TableCell className="text-muted-foreground">cliente</TableCell>
-                <TableCell className="flex-justify-end">
+                <TableCell className="flex justify-end">
                   {order.customer.name}
                 </TableCell>
               </TableRow>
@@ -62,14 +64,14 @@ export function OrderDetails({ orderId, open }: OrderDetailsProps) {
                 <TableCell className="text-muted-foreground">
                   Telefone
                 </TableCell>
-                <TableCell className="flex-justify-end">
+                <TableCell className="flex justify-end">
                   {order.customer.phone ?? 'Não informado'}
                 </TableCell>
               </TableRow>
 
               <TableRow>
                 <TableCell className="text-muted-foreground">Email</TableCell>
-                <TableCell className="flex-justify-end">
+                <TableCell className="flex justify-end">
                   {order.customer.email.toLocaleLowerCase()}
                 </TableCell>
               </TableRow>
@@ -78,8 +80,8 @@ export function OrderDetails({ orderId, open }: OrderDetailsProps) {
                 <TableCell className="text-muted-foreground">
                   Realizado
                 </TableCell>
-                <TableCell className="flex-justify-end">
-                  {formatDistanceToNow(order.createdAt, {
+                <TableCell className="flex justify-end">
+                  {formatDistanceToNow(new Date(order.createdAt), {
                     locale: ptBR,
                     addSuffix: true,
                   })}
@@ -135,6 +137,8 @@ export function OrderDetails({ orderId, open }: OrderDetailsProps) {
             </TableFooter>
           </Table>
         </div>
+      ) : (
+        <OrderDetailsSkeleton />
       )}
     </DialogContent>
   )
