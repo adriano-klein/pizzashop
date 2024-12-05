@@ -34,8 +34,8 @@ export function DayOrderAmount() {
               ) : (
                 <>
                   <span className="text-rose-50 dark:text-rose-400">
-                    -{dayOrdersAmount.diffFromYesterday}
-                  </span>
+                    {dayOrdersAmount.diffFromYesterday}
+                  </span>{' '}
                   em relação a ontem
                 </>
               )}
