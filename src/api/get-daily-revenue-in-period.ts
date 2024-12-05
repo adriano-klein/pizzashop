@@ -23,6 +23,5 @@ export async function getDailyRevenueInPeriod({
       },
     },
   )
-  console.log('Daiky Revenue', response.data)
   return response.data
 }

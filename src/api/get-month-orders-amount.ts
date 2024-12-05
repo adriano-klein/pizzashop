@@ -1,6 +1,6 @@
 import { api } from '@/lib/axios'
 
-interface GetMonthOrdersAmountProps {
+export interface GetMonthOrdersAmountProps {
   amount: number
   diffFromLastMonth: number
 }
