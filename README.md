@@ -152,7 +152,3 @@ Para dúvidas ou sugestões, entre em contato:
 
 - Email: adriano25klein@gmail.com
 - LinkedIn: https://www.linkedin.com/in/adriano-klein/
-
----
-
-Caso precise de mais personalizações, posso ajustar conforme necessário! 😊
