@@ -14,7 +14,7 @@ export function Error() {
       <pre>{error?.message || JSON.stringify(error)}</pre>
       <p className="text-accent-foreground">
         Voltar para o{' '}
-        <Link className="dark: text-sky-400 text-sky-600" to={'/'}>
+        <Link className="dark: text-sky-400" to={'/'}>
           Dashboard
         </Link>
       </p>

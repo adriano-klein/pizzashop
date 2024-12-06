@@ -15,7 +15,7 @@ export const router = createBrowserRouter([
     element: <AppLayout />,
     // NOTE: usar o errorElement para renderizar uma página não encontrada não é o ideal, pois ele será também chamado quando um erro ocorrer
     // errorElement: <NotFound />,
-    errorElement: <NotFound />,
+    errorElement: <Error />,
     children: [
       { path: '/', element: <Dashboard /> },
       { path: '/orders', element: <Orders /> },
@@ -31,6 +31,6 @@ export const router = createBrowserRouter([
   },
   {
     path: '*',
-    element: <Error />,
+    element: <NotFound />,
   },
 ])

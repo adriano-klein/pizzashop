@@ -1,12 +1,12 @@
 import { http, HttpResponse } from 'msw'
 
-import { GetDayOrdersAmountProps } from '../get-day-orders-amount'
+import { GetDayOrdersAmountProps } from '../get-day-orders-amount.ts'
 
-export const getDayOrdersAmountMock = http.get<
+export const getDaysOrderAmountMock = http.get<
   never,
   never,
   GetDayOrdersAmountProps
->('/metrics/month-orders-amount', () => {
+>('/metrics/day-orders-amount', () => {
   return HttpResponse.json({
     amount: 20,
     diffFromYesterday: -5,
