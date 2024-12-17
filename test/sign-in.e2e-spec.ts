@@ -2,7 +2,7 @@ import { expect, test } from '@playwright/test'
 
 test('sign in successfully', async ({ page }) => {
   await page.goto('/sign-in', { waitUntil: 'networkidle' })
-  await page.getByText('Seu E-mail').fill('adriano25klein@gmail.com')
+  await page.getByText('Seu E-mail').fill('johndoe@example.com')
   await page.getByRole('button', { name: 'Acessar painel' }).click()
 
   const toast = page.getByText(
@@ -14,7 +14,7 @@ test('sign in successfully', async ({ page }) => {
 
 test('sign in with wrong credentials', async ({ page }) => {
   await page.goto('/sign-in', { waitUntil: 'networkidle' })
-  await page.getByText('Seu E-mail').fill('adriano5klein@gmail.com')
+  await page.getByText('Seu E-mail').fill('email@example.com')
   await page.getByRole('button', { name: 'Acessar painel' }).click()
 
   const toast = page.getByText('Erro ao acessar painel')
