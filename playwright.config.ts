@@ -1,4 +1,4 @@
-import { defineConfig, devices } from '@playwright/test';
+import { defineConfig } from '@playwright/test'
 
 /**
  * Read environment variables from file.
@@ -12,20 +12,21 @@ import { defineConfig, devices } from '@playwright/test';
  * See https://playwright.dev/docs/test-configuration.
  */
 export default defineConfig({
-  testDir: "./test",
+  testDir: './test',
+  testMatch: /.*\.e2e-spec\.ts$/,
   fullyParallel: true,
   forbidOnly: !!process.env.CI,
   retries: process.env.CI ? 2 : 0,
   workers: process.env.CI ? 1 : undefined,
-  reporter: "html",
+  reporter: 'html',
   use: {
     /* Base URL to use in actions like `await page.goto('/')`. */
-    baseURL: "http://localhost:50789",
+    baseURL: 'http://localhost:50789',
   },
   /* Run your local dev server before starting the tests */
   webServer: {
-    command: "npm dev:test",
-    url: "http://localhost:50789",
+    command: 'npm dev:test',
+    url: 'http://localhost:50789',
     reuseExistingServer: !process.env.CI,
   },
-});
+})
